@@ -1,0 +1,63 @@
+<h1>Products</h1>
+<hr>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td><strong></strong></td>
+                <td><strong>Product</strong></td>
+                <td><strong>Description</strong></td>
+                <td><strong>Price</strong></td>
+                <td><strong>Code</strong></td>
+                <td><strong>Stock</strong></td>
+                <td><strong>Category</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr>
+                <td><button class="btn btn-success" onclick="addProductToCart(`{{this._id}}`)">Add To Cart</button></td>
+                <td>{{this.title}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.code}}</td>
+                <td>{{this.stock}}</td>
+                <td>{{this.category}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    
+    <div>
+        {{#if paginateInfo.hasPrevPage}}
+            <a href="{{paginateInfo.prevLink}}">Previus</a>
+        {{/if}}
+        {{#if paginateInfo.hasNextPage}}
+            <a href="{{paginateInfo.nextLink}}">Next</a>
+        {{/if}}
+    </div>    
+</div>
+
+<script>
+    addProductToCart = (pid) => {
+        fecth("/api/carts", {
+            method: "post"
+        })
+            .then(result => result.json())
+            .then(result => {
+                if(result.status === "error") throw new Error(result.error)
+                return result.payload._id
+            })
+            .then(cid => 
+                fetch(`/api/carts/${cid}/product/${pid}`, {
+                    method: "post"
+                })
+            )
+            .then(result => result.json())
+            .then(result => {
+                if(result.status === "error") throw new Error(result.error)
+                alert("OK. Todo salió bien.")
+            })
+            .catch(err => alert(`Ocurrió un error: ${err}`))
+    }
+</script>
