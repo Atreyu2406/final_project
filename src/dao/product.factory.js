@@ -4,13 +4,13 @@ export let Product
 
 switch (config.persistence) {
     case "MONGO":
-        const ProductMongoDAO = await import ("../dao/product.mongo.dao.js")
+        const { default: ProductMongoDAO } = await import ("../dao/product.mongo.dao.js")
         Product = ProductMongoDAO
         break
-    // case "FILE":
-    //     const ProductFileDao = await import ("../dao/product.file.dao.js")
-    //     Product = ProductFileDao
-    //     break
+    case "FILE":
+        const { default: ProductFileDAO } = await import ("../dao/product.file.dao.js")
+        Product = ProductFileDAO
+        break
     default:
         break
 }

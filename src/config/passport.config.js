@@ -27,7 +27,7 @@ const initializePassport = () => {
                 age,
                 email, 
                 password: createHash(password),
-                role: email === "adminCoder@coder.com" && password === "adminCod3r123" ? "admin" : "user"
+                role
             }
             const result = await userModel.create(newUser)
             return done(null, result)

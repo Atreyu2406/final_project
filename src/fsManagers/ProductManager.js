@@ -71,5 +71,5 @@ const product = new ProductManager()
 
 // product.addProduct("Harry Potter 3", "Fantastic literature", "AAA003", 15000, 12, "Books")
 
-product.updatedProduct({ category: "CDs" })
+// product.updatedProduct({ category: "CDs" })
 

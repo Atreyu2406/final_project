@@ -1,1 +1,13 @@
-[]
+[
+	{
+		"id": 1,
+		"status": true,
+		"thumbnail": [],
+		"title": "Harry Potter 3",
+		"description": "Fantastic book",
+		"code": "AAA003",
+		"price": 15200,
+		"stock": 5,
+		"category": "books"
+	}
+]

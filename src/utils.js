@@ -19,6 +19,7 @@ export const isValidPassword = (user, password) => {
 
 export const handlePolicies = policies => (req, res, next) => {
     const user = req.user || null
+    if (!user) return res.status(401).json({ error: "No está autenticado" });
     if(policies.includes("admin")) {
         if(user.role !== "admin") return res.status(403).json({ error: "error", error: "Need to be an Admin" })
     }
